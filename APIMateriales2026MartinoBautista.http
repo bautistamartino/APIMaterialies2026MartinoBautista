@@ -1,0 +1,6 @@
+@APIMateriales2026MartinoBautista_HostAddress = http://localhost:5126
+
+GET {{APIMateriales2026MartinoBautista_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

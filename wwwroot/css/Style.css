@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.bg1 {
+    background-color: grey !important;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.container{
+    height: 100%;
+}
+h1{
+    color: yellow;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 10px 0px 20px 0px;
+}
+
+hr {
+    margin: 0.5rem 0 !important;
+}
+
+/*login*/
+.sectionlogin{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+}
+s
+.login-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card{
+    background-color: white;
+    padding: 40px;
+    width: 400px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.login-card h1{
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.subtitulo{
+    text-align: center;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.campo{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.campo label{
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #444;
+}
+
+.campo input{
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.campo input:focus{
+    outline: none;
+    border-color: #2a5298;
+}
+
+.btn-login{
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2a5298;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-login:hover{
+    background-color: #1e3c72;
+}
+
+.olvide-password{
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #2a5298;
+}
+
+.olvide-password:hover{
+    text-decoration: underline;
+}
+
+/*register*/
+
+.enlaces{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.enlaces p{
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.enlaces a{
+    color: #2a5298;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.enlaces a:hover{
+    text-decoration: underline;
+}
