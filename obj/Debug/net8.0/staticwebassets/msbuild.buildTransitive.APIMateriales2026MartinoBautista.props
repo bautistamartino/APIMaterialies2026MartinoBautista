@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\APIMateriales2026MartinoBautista.props" />
-</Project>
