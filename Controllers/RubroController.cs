@@ -51,6 +51,13 @@ namespace APIMateriales2026MartinoBautista.Controllers
                 return BadRequest();
             }
 
+            if (string.IsNullOrWhiteSpace(rubro.Descripcion))
+            {
+                return BadRequest("La descripción del rubro es obligatoria.");
+            }
+
+            rubro.Descripcion = rubro.Descripcion.Trim().ToUpperInvariant();
+
             _context.Entry(rubro).State = EntityState.Modified;
 
             try
@@ -77,6 +84,13 @@ namespace APIMateriales2026MartinoBautista.Controllers
         [HttpPost]
         public async Task<ActionResult<Rubro>> PostRubro(Rubro rubro)
         {
+            if (string.IsNullOrWhiteSpace(rubro.Descripcion))
+            {
+                return BadRequest("La descripción del rubro es obligatoria.");
+            }
+
+            rubro.Descripcion = rubro.Descripcion.Trim().ToUpperInvariant();
+
             _context.Rubros.Add(rubro);
             await _context.SaveChangesAsync();
 

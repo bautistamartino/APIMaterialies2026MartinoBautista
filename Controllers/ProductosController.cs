@@ -51,6 +51,13 @@ namespace APIMateriales2026MartinoBautista.Controllers
                 return BadRequest();
             }
 
+            if (string.IsNullOrWhiteSpace(productos.Descripcion))
+            {
+                return BadRequest("La descripción del producto es obligatoria.");
+            }
+
+            productos.Descripcion = productos.Descripcion.Trim().ToUpperInvariant();
+
             _context.Entry(productos).State = EntityState.Modified;
 
             try
@@ -77,6 +84,13 @@ namespace APIMateriales2026MartinoBautista.Controllers
         [HttpPost]
         public async Task<ActionResult<Productos>> PostProductos(Productos productos)
         {
+            if (string.IsNullOrWhiteSpace(productos.Descripcion))
+            {
+                return BadRequest("La descripción del producto es obligatoria.");
+            }
+
+            productos.Descripcion = productos.Descripcion.Trim().ToUpperInvariant();
+
             _context.Productos.Add(productos);
             await _context.SaveChangesAsync();
 

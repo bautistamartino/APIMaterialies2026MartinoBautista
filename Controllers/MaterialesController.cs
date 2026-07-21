@@ -51,6 +51,23 @@ namespace APIMateriales2026MartinoBautista.Controllers
                 return BadRequest();
             }
 
+            if (string.IsNullOrWhiteSpace(materiales.Descripcion))
+            {
+                return BadRequest("La descripción del material es obligatoria.");
+            }
+
+            if (materiales.RubroId <= 0)
+            {
+                return BadRequest("Debe seleccionar un rubro válido.");
+            }
+
+            if (materiales.PrecioCosto <= 0)
+            {
+                return BadRequest("El precio costo debe ser mayor a cero.");
+            }
+
+            materiales.Descripcion = materiales.Descripcion.Trim().ToUpperInvariant();
+
             _context.Entry(materiales).State = EntityState.Modified;
 
             try
@@ -77,6 +94,23 @@ namespace APIMateriales2026MartinoBautista.Controllers
         [HttpPost]
         public async Task<ActionResult<Materiales>> PostMateriales(Materiales materiales)
         {
+            if (string.IsNullOrWhiteSpace(materiales.Descripcion))
+            {
+                return BadRequest("La descripción del material es obligatoria.");
+            }
+
+            if (materiales.RubroId <= 0)
+            {
+                return BadRequest("Debe seleccionar un rubro válido.");
+            }
+
+            if (materiales.PrecioCosto <= 0)
+            {
+                return BadRequest("El precio costo debe ser mayor a cero.");
+            }
+
+            materiales.Descripcion = materiales.Descripcion.Trim().ToUpperInvariant();
+
             _context.Materiales.Add(materiales);
             await _context.SaveChangesAsync();
 
