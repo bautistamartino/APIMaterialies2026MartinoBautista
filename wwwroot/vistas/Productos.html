@@ -31,6 +31,8 @@
             <tr>
                 <th>Id</th>
                 <th>Descripcion</th>
+                <th>Total Costo</th>
+                <th></th>
                 <th></th>
                 <th></th>
             </tr>
@@ -64,6 +66,83 @@
     </div>
 </div>
 
+<!--Modal detalle --> 
+<div class="modal fade" id="ModalComposicionProducto" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="TituloModalProducto">Composición del Producto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <input type="hidden" id="ProductoIdComposicion">
+    <!--Datos del producto -->
+    <div class="row mb-3">
+        <div class="col-md-8">
+            <label for="DescripcionComposicion" class="form-label fw-semibold">
+                Nombre del Producto
+            </label>
+            <input type="text"
+                    id="DescripcionComposicion"
+                    class="form-control form-control-custom"
+                    placeholder="Ingrese el nombre del producto" disabled>
+            </div>
+        </div>
+    <!-- Agregar Material -->
+    <div class="row mb-3">
+            <div class="col-md-5">
+                    <label class="form-label mt-2">Material</label>
+                    <select id="MaterialId" class="form-select"></select>
+            </div>
+            
+            <div class="col-md-2">
+                <label class="form-label fw-semibold">Cantidad</label>
+                <input type="number"
+                    id="CantidadMaterial"
+                    class="form-control form-control-custom">
+            </div>
+            <div class="col-md-1 d-flex align-items-end">
+                <button class="btn btn-custom-primary w-100"
+                onclick="AgregarMaterial();">
+                <i class="bi bi-plus-circle">Agregar</i>
+                </button>
+            </div>
+        </div>
+<!-- Tabla de Materiales -->
+        <table class="table table-custom table-hover">
+            <thead>
+                <tr>
+                    <th>Material</th>
+                    <th>Cantidad</th>
+                    <th>Precio Costo</th>
+                    <th>Subtotal</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="tablaMateriales">
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="3" class="text-end">Total Costo</th>
+                    <th id="TotalCosto">$0.00</th>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
+        <p id="ErrorMsg" class="text-danger fw-bold"></p>
+        </div>
+        <div class="modal-footer"></div>
+            <button class="btn btn-custom-secondary"
+            data-bs-dismiss="modal">
+            Cancelar
+    </button>
+        <button class="btn btn-custom-primary"
+            onclick="GuardarComposicion();">
+            Guardar Composición</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

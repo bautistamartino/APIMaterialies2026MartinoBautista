@@ -25,6 +25,7 @@ namespace APIMateriales2026MartinoBautista.Controllers
         public async Task<ActionResult<IEnumerable<Productos>>> GetProductos()
         {
             return await _context.Productos.ToListAsync();
+
         }
 
         // GET: api/Productos/5
@@ -117,5 +118,53 @@ namespace APIMateriales2026MartinoBautista.Controllers
         {
             return _context.Productos.Any(e => e.ProductoId == id);
         }
+
+        // [HttpPost("AgregarMateriales/{id}")]
+        [HttpPost("AgregarMateriales")]
+        public async Task<ActionResult<IEnumerable<MaterialProductos>>> PostMaterialesProductos(List<MaterialProductos> materialesProductos)
+        {
+        
+            if (materialesProductos == null || materialesProductos.Count == 0)
+            {
+                return BadRequest("No se recibieron materiales para la composición.");
+                
+            }
+
+            var productoId = materialesProductos.First().ProductoId;
+
+            if (materialesProductos.Any(mp => mp.ProductoId != productoId))
+            {
+                return BadRequest("Todos los materiales deben pertenecer al mismo producto.");
+            }
+
+            var existentes = _context.MaterialesProductos.Where(mp => mp.ProductoId == productoId);
+            _context.MaterialesProductos.RemoveRange(existentes);
+
+            foreach (var item in materialesProductos)
+            {
+                if (item.MaterialId <= 0 || item.ProductoId <= 0 || item.Cantidad <= 0 || item.PrecioCostoUnitario <= 0)
+                {
+                    return BadRequest("Cada material debe tener material, producto, cantidad y precio costo unitario válidos.");
+                }
+
+                item.Subtotal = item.Cantidad * item.PrecioCostoUnitario;
+            }
+
+            _context.MaterialesProductos.AddRange(materialesProductos);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetMaterialesProductosByProducto), new { productoId }, materialesProductos);
+        }
+
+        [HttpGet("producto/{productoId}")]
+        public async Task<ActionResult<IEnumerable<MaterialProductos>>> GetMaterialesProductosByProducto(int productoId)
+        {
+            var composicion = await _context.MaterialesProductos
+                .Where(mp => mp.ProductoId == productoId)
+                .ToListAsync();
+
+            return composicion;
+        }
     }
 }
+

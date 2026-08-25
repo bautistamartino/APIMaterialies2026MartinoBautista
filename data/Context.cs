@@ -20,6 +20,7 @@ public class Context : IdentityDbContext<ApplicationUser>
     public DbSet<Materiales> Materiales { get; set; }
     public DbSet<Productos> Productos { get; set; }
     public DbSet<Rubro> Rubros { get; set; }
+    public DbSet<MaterialProductos> MaterialesProductos { get; set; }
 
 }
 

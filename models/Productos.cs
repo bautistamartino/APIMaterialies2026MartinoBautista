@@ -8,5 +8,7 @@ namespace APIMateriales2026MartinoBautista.models
 
         public string? Descripcion { get; set; } = null!;
         public bool Eliminado { get; set; }
+
+        public decimal CostoTotal  { get; set; }
     }
 }

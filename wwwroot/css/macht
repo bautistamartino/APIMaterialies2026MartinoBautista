@@ -1,0 +1,348 @@
+// // -- Historial CAMBIO--
+
+
+// -- modelo
+// using System.ComponentModel.DataAnnotations;
+
+// namespace APIMateriales2026MartinoBautista.models
+// {
+// public class HistorialMateriales
+//     {
+//         [Key]
+//         public int MaterialHistorialId { get; set; }
+//         public int MaterialId { get; set; }
+//         public DateTime FechaCambio { get; set; }
+//         public string? CampoModificado { get; set; }
+//         public string? ValorAnterior { get; set; }
+//         public string? ValorNuevo { get; set; }
+//     } 
+    
+//   public class VistaHistorialMateriales
+//     {
+//         public int MaterialHistorialId { get; set; }
+//         public int MaterialId { get; set; }
+//         public string? FechaCambio { get; set; }
+//         public string? CampoModificado { get; set; }
+//         public string? ValorAnterior { get; set; }
+//         public string? ValorNuevo { get; set; }
+//     }   
+// }
+
+// // put controller
+// try
+//                 {
+//                 var MaterialOriginal = await _context.Materiales.FindAsync(id);
+//                 if (MaterialOriginal == null)
+//                 {
+//                     return NotFound();
+//                 }
+
+//                 if (MaterialOriginal.Descripcion != materiales.Descripcion)
+//                 {
+//                     var cambioMaterial = new models.HistorialMateriales
+//                     {
+//                         MaterialId = id,
+//                         FechaCambio = DateTime.Now,
+//                         CampoModificado = "DESCRIPCION",
+//                         ValorAnterior = MaterialOriginal.Descripcion,
+//                         ValorNuevo = materiales.Descripcion
+//                     };
+//                     _context.HistorialMaterial.Add(cambioMaterial);
+//                 }
+                MaterialOriginal.Descripcion = materiales.Descripcion;
+//              MaterialOriginal.RubroId = materiales.RubroId;
+//              MaterialOriginal.PrecioCosto = materiales.PrecioCosto;
+
+//                 await _context.SaveChangesAsync();
+//             }
+//             catch (DbUpdateConcurrencyException)
+//             {
+//                 if (!MaterialesExists(id))
+//                 {
+//                     return NotFound();
+//                 }
+//                 else
+//                 {
+//                     throw;
+//                 }
+//             }
+//             catch (DbUpdateException dbEx)
+//             {
+//                 return StatusCode(StatusCodes.Status500InternalServerError, new { mensaje = "Error al guardar los cambios del alumno.", detalle = dbEx.Message });
+//             }
+
+//             return NoContent();
+// }
+
+// //endpoin cs
+// [HttpGet("historialmaterial/{id}")]
+//         public async Task<ActionResult<IEnumerable<VistaHistorialMateriales>>> GetHistorialMaterial(int id)
+//         {
+//             List<VistaHistorialMateriales> HistorialMostrar = new List<VistaHistorialMateriales>();
+
+//             var historiales = await _context.HistorialMaterial
+//                 .Where(a => a.MaterialId == id)
+//                 .OrderByDescending(a => a.FechaCambio)
+//                 .ToListAsync();
+
+//             foreach (var historial in historiales)
+//             {
+//                 var materialesHistorial = new VistaHistorialMateriales
+//                 {
+//                     FechaCambio = historial.FechaCambio.ToString("dd/MM/yyyy HH:mm"),
+//                     CampoModificado = historial.CampoModificado,
+//                     ValorAnterior = historial.ValorAnterior,
+//                     ValorNuevo = historial.ValorNuevo
+//                 };
+
+//                 HistorialMostrar.Add(materialesHistorial);
+//             }
+
+//             return HistorialMostrar;
+//         }
+
+
+
+// // btn js
+//                     <td>
+//                         <button class="btn btn-primary btn-sm"
+//                             onclick="HistorialMaterial(${material.materialId})">
+//                             Historial
+//                         </button>
+//                     </td>
+
+
+// // funcion js
+//         async function HistorialMaterial(id) {
+//     try {
+//         const response = await fetch(`${url}/historialmaterial/${id}`);
+
+//         if (!response.ok) {
+//             throw new Error("No se pudo obtener el historial");
+//         }
+
+//         const data = await response.json();
+//         const tbody = document.getElementById("Tbody-historial-material");
+
+//         if (!tbody) return;
+
+//         if (!data || data.length === 0) {
+//             tbody.innerHTML = `
+//                 <tr>
+//                     <td colspan="4" class="text-center">No hay modificaciones registradas</td>
+//                 </tr>
+//             `;
+//         } else {
+//             tbody.innerHTML = data.map(item => `
+//                 <tr>
+//                     <td>${item.fechaCambio ?? "-"}</td>
+//                     <td>${item.campoModificado ?? "-"}</td>
+//                     <td>${item.valorAnterior ?? "-"}</td>
+//                     <td>${item.valorNuevo ?? "-"}</td>
+//                 </tr>
+//             `).join("");
+//         }
+
+//         const historialModal = new bootstrap.Modal(document.getElementById("ModalHistorialMaterial"));
+//         historialModal.show();
+
+//     } catch (error) {
+//         console.error(error);
+//         Swal.fire({
+//             icon: "error",
+//             title: "Error",
+//             text: "No se pudo abrir el historial del material.",
+//             confirmButtonText: "Aceptar"
+//         });
+//     }
+// }
+
+
+
+// // -- maestro detalle
+
+// // --Modal detalle / agregar 
+// <div class="modal fade" id="ModalProducto" tabindex="-1">
+//     <div class="modal-dialog modal-lg">
+//         <div class="modal-content">
+//             <div class="modal-header">
+//                 <h5 class="modal-title" id="TituloModalProducto">Crear Producto</h5>
+//                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+//             </div>
+//             <div class="modal-body p-4">
+//                 <input type="hidden" id="ProductoId">
+
+//     <!-- Datos del producto -->
+//     <div class="row mb-3">
+//         <div class="col-md-8">
+//             <label for="DescripcionProducto" class="form-label fw-semibold">
+//                 Nombre del Producto
+//             </label>
+//             <input type="text"
+//                    id="DescripcionProducto"
+//                    class="form-control form-control-custom"
+//                    placeholder="Ingrese el nombre del producto">
+//         </div>
+
+//     </div>
+
+//     <!-- Agregar Material -->
+//     <div class="row mb-3">
+
+//         <div class="col-md-5">
+//             <label class="form-label fw-semibold">
+//                 Material
+//             </label>
+//             <select id="MaterialId"
+//                     class="form-control form-control-custom">
+//             </select>
+//         </div>
+
+//         <div class="col-md-2">
+//             <label class="form-label fw-semibold">
+//                 Precio Costo
+//             </label>
+//             <input type="number"
+//                    id="PrecioCosto"
+//                    class="form-control form-control-custom"
+//                    disabled>
+//         </div>
+
+//         <div class="col-md-2">
+//             <label class="form-label fw-semibold">
+//                 Cantidad
+//             </label>
+//             <input type="number"
+//                    id="CantidadMaterial"
+//                    class="form-control form-control-custom">
+//         </div>
+
+//         <div class="col-md-2">
+//             <label class="form-label fw-semibold">
+//                 Subtotal
+//             </label>
+//             <input type="number"
+//                    id="SubtotalMaterial"
+//                    class="form-control form-control-custom"
+//                    disabled>
+//         </div>
+
+//         <div class="col-md-1 d-flex align-items-end">
+//             <button class="btn btn-custom-primary w-100"
+//                     onclick="AgregarMaterial();">
+//                 <i class="bi bi-plus-circle"></i>
+//             </button>
+//         </div>
+
+//     </div>
+
+//     <!-- Tabla de Materiales -->
+//     <table class="table table-custom table-hover">
+//         <thead>
+//             <tr>
+//                 <th>Material</th>
+//                 <th>Cantidad</th>
+//                 <th>Precio Costo</th>
+//                 <th>Subtotal</th>
+//                 <th></th>
+//             </tr>
+//         </thead>
+
+//         <tbody id="tablaMateriales">
+//         </tbody>
+
+//         <tfoot>
+//             <tr>
+//                 <th colspan="3" class="text-end">
+//                     Total Costo
+//                 </th>
+
+//                 <th id="TotalCosto">$0.00</th>
+
+//                 <th></th>
+//             </tr>
+//         </tfoot>
+//     </table>
+
+//     <p id="ErrorMsg" class="text-danger fw-bold"></p>
+
+// </div>
+
+// <div class="modal-footer">
+
+//     <button class="btn btn-custom-secondary"
+//             data-bs-dismiss="modal">
+//         Cancelar
+//     </button>
+
+//     <button class="btn btn-custom-primary"
+//             onclick="GuardarProducto();">
+//         Guardar Producto
+//     </button>
+
+// </div>
+//         </div>
+//     </div>
+// </div>
+
+// -- modal detalle estatico 
+
+// <!-- MODAL DETALLE-->
+//  <div class="modal fade" id="ModalConsultarProducto" tabindex="-1">
+//     <div class="modal-dialog modal-lg">
+//         <div class="modal-content">
+//             <div class="modal-header">
+//                 <h5 class="modal-title">
+//                     Detalle del Producto
+//                 </h5>
+//                 <button type="button"
+//                         class="btn-close"
+//                         data-bs-dismiss="modal">
+//                 </button>
+//             </div>
+//             <div class="modal-body">
+//                 <!-- Nombre del producto -->
+//                 <div class="row mb-4">
+//                     <div class="col-md-12">
+//                         <label class="form-label fw-bold">
+//                             Producto
+//                         </label>
+//                         <input type="text"
+//                                id="NombreProductoDetalle"
+//                                class="form-control"
+//                                disabled>
+//                     </div>
+//                 </div>
+//                 <!-- Materiales -->
+//                 <table class="table table-hover table-bordered">
+//                     <thead>
+//                         <tr>
+//                             <th>Material</th>
+//                             <th>Cantidad</th>
+//                             <th>Precio Unitario</th>
+//                             <th>Total Material</th>
+//                         </tr>
+//                     </thead>
+//                     <tbody id="tbodyDetalleProducto">
+//                     </tbody>
+//                     <tfoot>
+//                         <tr>
+//                             <th colspan="3" class="text-end">
+//                                 Costo Total del Producto
+//                             </th>
+//                             <th id="TotalProducto">
+//                                 $0.00
+//                             </th>
+//                         </tr>
+//                     </tfoot>
+//                 </table>
+//             </div>
+//             <div class="modal-footer">
+//                 <button class="btn btn-secondary"
+//                         data-bs-dismiss="modal">
+//                     Cerrar
+//                 </button>
+//             </div>
+//         </div>
+//     </div>
+// </div>
