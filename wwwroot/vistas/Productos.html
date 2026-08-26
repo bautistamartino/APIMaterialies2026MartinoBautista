@@ -31,10 +31,11 @@
             <tr>
                 <th>Id</th>
                 <th>Descripcion</th>
-                <th>Total Costo</th>
-                <th></th>
-                <th></th>
-                <th></th>
+                <th>Precio costo</th>
+                <th>Precio venta</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+                <th>Composición</th>
             </tr>
         </thead>
         <tbody id="TodosLosProductos"></tbody>
@@ -56,6 +57,15 @@
 
                     <label class="form-label">Descripción</label>
                     <input type="text" id="Descripcion" class="form-control">
+
+                    <label class="form-label">Precio costo</label>
+                    <input type="number" id="PrecioCosto" class="form-control" disabled>
+
+                    <label class="form-label">Porcentaje de ganancia</label>
+                    <input type="number" id="PorcentajeGanancia" class="form-control">
+
+                    <label class="form-label">Precio de venta</label>
+                    <input type="number" id="PrecioVenta" class="form-control" disabled>
 
                 </div>
             <div class="modal-footer">

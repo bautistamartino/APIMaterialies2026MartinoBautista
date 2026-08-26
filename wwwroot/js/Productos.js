@@ -30,7 +30,8 @@ async function ObtenerProductos() {
                 <tr>
                     <td>${producto.productoId}</td>
                     <td>${producto.descripcion}</td>
-                    <td>$ ${producto.costoTotal?.toFixed(2) ?? "0.00"}</td>
+                    <td>${producto.precioCosto?.toFixed(2) ?? "0.00"}</td>
+                    <td>${producto.precioVenta?.toFixed(2) ?? "0.00"}</td>
                     <td>
                         <button class="btn btn-warning btn-sm"
                             onclick="AbrirModalEditarProducto(${producto.productoId})">
@@ -91,6 +92,9 @@ async function AbrirModalEditarProducto(id) {
 
     document.getElementById("ProductoId").value = producto.productoId;
     document.getElementById("Descripcion").value = producto.descripcion;
+    document.getElementById("PrecioCosto").value = producto.precioCosto;
+    document.getElementById("PorcentajeGanancia").value = producto.porcentajeGanancia;
+    document.getElementById("PrecioVenta").value = producto.precioVenta;
 
     modalProducto = new bootstrap.Modal(document.getElementById("ModalProducto"));
     modalProducto.show();
